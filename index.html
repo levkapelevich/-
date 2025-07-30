@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mr_Kapelevik — Лёва Капелевич</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 20px;
+    background: linear-gradient(135deg, #c3d9ff, #e9f0ff);
+    color: #222;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 700px;
+    margin: auto;
+    background: rgba(255,255,255,0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding: 30px;
+  }
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  img.photo {
+    display: block;
+    max-width: 150px;
+    border-radius: 15px;
+    margin: 0 auto 25px auto;
+    border: 2px solid rgba(255,255,255,0.6);
+  }
+  .lang-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .lang-buttons button {
+    background: #a4c9ff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin: 0 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .lang-buttons button:hover {
+    background: #7aaaff;
+  }
+  section {
+    margin-bottom: 30px;
+  }
+  .contacts {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.1em;
+    flex-wrap: wrap;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-icon {
+    width: 24px;
+    height: 24px;
+    fill: #3366cc;
+  }
+  ul.skills-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+  .phone {
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="lang-buttons">
+    <button onclick="setLang('ru')">Русский</button>
+    <button onclick="setLang('en')">English</button>
+    <button onclick="setLang('de')">Deutsch</button>
+    
+  </div>
+
+  <h1 id="title">Резюме</h1>
+
+  <img class="photo" src="https://a.imgfoto.host/2025/07/30/PXL_20250320_143242098.PORTRAIT.jpeg" alt="Фотография" />
+
+  <section>
+    <h2 id="about-title">Обо мне</h2>
+    <p id="about-text">Я учусь в 74-й гимназии Санкт-Петербурга, изучаю немецкий язык, уровень А1. Школьник.</p>
+  </section>
+
+  <section>
+    <h2 id="skills-title">Навыки</h2>
+    <ul class="skills-list" id="skills-list">
+      <li>Немецкий язык — уровень А1</li>
+      <li>Работа с компьютером</li>
+      <li>Базовые навыки программирования</li>
+      <li>Коммуникация и командная работа</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 id="contacts-title">Контакты</h2>
+    <div class="contacts">
+      <div class="contact-item">
+        <span id="phone-label" class="phone-label">Телефон:</span> 
+        <span class="phone">+7 (921) 352-15-12</span>
+      </div>
+      <div class="contact-item">
+        <!-- Telegram Icon -->
+       
+        <a href="https://t.me/Mr_Kapelevi" target="_blank" rel="noopener noreferrer">Telegram</a>
+      </div>
+      <div class="contact-item">
+        <!-- VK Icon -->
+
+        <a href="https://vk.com/kapelevik" target="_blank" rel="noopener noreferrer">VK</a>
+      </div>
+      <div class="contact-item">
+        <!-- YouTube Icon -->
+        
+
+
+
+        <a href="https://youtube.com/@mr_kapelevik" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const data = {
+    ru: {
+      title: "Лёва Капелевич",
+      "about-title": "Обо мне",
+      "about-text": "Я учусь в 74-й гимназии Санкт-Петербурга, изучаю немецкий язык, уровень А1. Школьник.",
+      "skills-title": "Навыки",
+      skills: [
+        "Немецкий язык — уровень А1",
+        "Работа с компьютером",
+        "Базовые навыки программирования",
+        "Коммуникация и командная работа"
+      ],
+      "contacts-title": "Контакты",
+      "phone-label": "Телефон:"
+    },
+    en: {
+      title: "Lev Kapelevich",
+      "about-title": "About Me",
+      "about-text": "I study at Gymnasium No. 74 in Saint Petersburg, learning German at level A1. I'm a school student.",
+      "skills-title": "Skills",
+      skills: [
+        "German language — level A1",
+        "Computer skills",
+        "Basic programming skills",
+        "Communication and teamwork"
+      ],
+      "contacts-title": "Contacts",
+      "phone-label": "Phone:"
+    },
+    de: {
+      title: "Lew Kapelewitsch",
+      "about-title": "Über mich",
+      "about-text": "Ich besuche das Gymnasium Nr. 74 in Sankt Petersburg und lerne Deutsch auf Niveau A1. Ich bin Schüler.",
+      "skills-title": "Fähigkeiten",
+      skills: [
+        "Deutsch – Niveau A1",
+        "Computerkenntnisse",
+        "Grundkenntnisse in Programmierung",
+        "Kommunikation und Teamarbeit"
+      ],
+      "contacts-title": "Kontakte",
+      "phone-label": "Telefon:"
+    },
+    he: {
+      title: "לוי יצחק קפלביץ",
+      "about-title": "עליי",
+      "about-text": "אני לומד בבית הספר התיכון מספר 74 בסנקט פטרבורג, לומד גרמנית ברמה A1. תלמיד.",
+      "skills-title": "כישורים",
+      skills: [
+        "שפה גרמנית – רמה A1",
+        "מיומנויות מחשב",
+        "מיומנויות תכנות בסיסיות",
+        "תקשורת ועבודת צוות"
+      ],
+      "contacts-title": "פרטים ליצירת קשר",
+      "phone-label": "טלפון:"
+    }
+  };
+
+  function setLang(lang) {
+    if (!data[lang]) return;
+    document.getElementById('title').textContent = data[lang].title;
+    document.getElementById('about-title').textContent = data[lang]["about-title"];
+    document.getElementById('about-text').textContent = data[lang]["about-text"];
+    document.getElementById('skills-title').textContent = data[lang]["skills-title"];
+    document.getElementById('contacts-title').textContent = data[lang]["contacts-title"];
+    document.getElementById('phone-label').textContent = data[lang]["phone-label"];
+
+    const skillsList = document.getElementById('skills-list');
+    skillsList.innerHTML = '';
+    data[lang].skills.forEach(skill => {
+      const li = document.createElement('li');
+      li.textContent = skill;
+      skillsList.appendChild(li);
+    });
+  }
+
+  // Установить русский по умолчанию
+  setLang('ru');
+</script>
+
+</body>
+</html>
