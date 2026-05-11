@@ -1,226 +1,412 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mr_Kapelevik — Лёва Капелевич</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; padding: 20px;
-    background: linear-gradient(135deg, #c3d9ff, #e9f0ff);
-    color: #222;
-    min-height: 100vh;
-  }
-  .container {
-    max-width: 700px;
-    margin: auto;
-    background: rgba(255,255,255,0.3);
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    padding: 30px;
-  }
-  h1, h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  img.photo {
-    display: block;
-    max-width: 150px;
-    border-radius: 15px;
-    margin: 0 auto 25px auto;
-    border: 2px solid rgba(255,255,255,0.6);
-  }
-  .lang-buttons {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .lang-buttons button {
-    background: #a4c9ff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 15px;
-    margin: 0 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .lang-buttons button:hover {
-    background: #7aaaff;
-  }
-  section {
-    margin-bottom: 30px;
-  }
-  .contacts {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    font-size: 1.1em;
-    flex-wrap: wrap;
-  }
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .contact-icon {
-    width: 24px;
-    height: 24px;
-    fill: #3366cc;
-  }
-  ul.skills-list {
-    list-style: none;
-    padding-left: 0;
-    font-size: 1.1em;
-    line-height: 1.5;
-  }
-  .phone {
-    font-weight: 600;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лев Капелевич | Личная страница</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --text-color: #ffffff;
+            --accent: #3b82f6;
+            --secondary: #0ea5e9;
+            --cyan: #22d3ee;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #0f172a;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Анимированный фон */
+        .background-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: -1;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: float 25s infinite alternate ease-in-out;
+        }
+
+        .blob-1 { width: 450px; height: 450px; background: #2563eb; top: -10%; left: -5%; }
+        .blob-2 { width: 550px; height: 550px; background: #0ea5e9; bottom: -15%; right: -5%; animation-delay: -5s; }
+        .blob-3 { width: 350px; height: 350px; background: #06b6d4; top: 30%; right: 20%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, 80px) scale(1.1); }
+            100% { transform: translate(-40px, -40px) scale(0.9); }
+        }
+
+        /* Основная карточка */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lang-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255,255,255,0.7);
+            padding: 8px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 800px) {
+            .content-grid { grid-template-columns: 1fr; }
+        }
+
+        .section-card {
+            background: rgba(15, 23, 42, 0.3);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 800px) {
+            .full-width { grid-column: auto; }
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--secondary);
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--secondary);
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.1);
+            color: #7dd3fc;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        .contacts-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contacts-list a {
+            color: #e2e8f0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .contacts-list a:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .projects-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .projects-list { grid-template-columns: 1fr; }
+        }
+
+        .project-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: 0.3s;
+        }
+
+        .project-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+
+        .project-name { font-weight: 700; color: #fff; font-size: 1.05rem; }
+        .project-desc { font-size: 0.85rem; color: #94a3b8; margin-top: 5px; line-height: 1.4; }
+
+        [dir="rtl"] .contacts-list a:hover { transform: translateY(-2px); }
+        [dir="rtl"] .subtitle, [dir="rtl"] h1 { text-align: right; }
+        [dir="rtl"] .project-item { text-align: right; }
+    </style>
 </head>
 <body>
 
-<div class="container">
-
-  <div class="lang-buttons">
-    <button onclick="setLang('ru')">Русский</button>
-    <button onclick="setLang('en')">English</button>
-    <button onclick="setLang('de')">Deutsch</button>
-    
-  </div>
-
-  <h1 id="title">Резюме</h1>
-
-  <img class="photo" src="https://a.fotohosting.pro/2025/07/30/PXL_20250320_143242098.PORTRAIT.jpg" alt="Фотография" />
-
-  <section>
-    <h2 id="about-title">Обо мне</h2>
-    <p id="about-text">Я учусь в 74-й гимназии Санкт-Петербурга, изучаю немецкий язык, уровень А1. Школьник.</p>
-  </section>
-
-  <section>
-    <h2 id="skills-title">Навыки</h2>
-    <ul class="skills-list" id="skills-list">
-      <li>Немецкий язык — уровень А1</li>
-      <li>Работа с компьютером</li>
-      <li>Базовые навыки программирования</li>
-      <li>Коммуникация и командная работа</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2 id="contacts-title">Контакты</h2>
-    <div class="contacts">
-      <div class="contact-item">
-        <span id="phone-label" class="phone-label">Телефон:</span> 
-        <span class="phone">+7 (921) 352-15-12</span>
-      </div>
-      <div class="contact-item">
-        <!-- Telegram Icon -->
-       
-        <a href="https://t.me/Mr_Kapelevi" target="_blank" rel="noopener noreferrer">Telegram</a>
-      </div>
-      <div class="contact-item">
-        <!-- VK Icon -->
-
-        <a href="https://vk.com/kapelevik" target="_blank" rel="noopener noreferrer">VK</a>
-      </div>
-      <div class="contact-item">
-        <!-- YouTube Icon -->
-        
-
-
-
-        <a href="https://youtube.com/@mr_kapelevik" target="_blank" rel="noopener noreferrer">YouTube</a>
-      </div>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2 :blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
-  </section>
 
-</div>
+    <div class="glass-card">
+        <!-- Навигация -->
+        <div class="lang-nav">
+            <button class="lang-btn active" onclick="setLanguage('ru')">🇷🇺 RU</button>
+            <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLanguage('de')">🇩🇪 DE</button>
+            <button class="lang-btn" onclick="setLanguage('he')">🇮🇱 HE</button>
+        </div>
 
-<script>
-  const data = {
-    ru: {
-      title: "Лёва Капелевич",
-      "about-title": "Обо мне",
-      "about-text": "Я учусь в 74-й гимназии Санкт-Петербурга, изучаю немецкий язык, уровень А1. Школьник.",
-      "skills-title": "Навыки",
-      skills: [
-        "Немецкий язык — уровень А1",
-        "Работа с компьютером",
-        "Базовые навыки программирования",
-        "Коммуникация и командная работа"
-      ],
-      "contacts-title": "Контакты",
-      "phone-label": "Телефон:"
-    },
-    en: {
-      title: "Lev Kapelevich",
-      "about-title": "About Me",
-      "about-text": "I study at Gymnasium No. 74 in Saint Petersburg, learning German at level A1. I'm a school student.",
-      "skills-title": "Skills",
-      skills: [
-        "German language — level A1",
-        "Computer skills",
-        "Basic programming skills",
-        "Communication and teamwork"
-      ],
-      "contacts-title": "Contacts",
-      "phone-label": "Phone:"
-    },
-    de: {
-      title: "Lew Kapelewitsch",
-      "about-title": "Über mich",
-      "about-text": "Ich besuche das Gymnasium Nr. 74 in Sankt Petersburg und lerne Deutsch auf Niveau A1. Ich bin Schüler.",
-      "skills-title": "Fähigkeiten",
-      skills: [
-        "Deutsch – Niveau A1",
-        "Computerkenntnisse",
-        "Grundkenntnisse in Programmierung",
-        "Kommunikation und Teamarbeit"
-      ],
-      "contacts-title": "Kontakte",
-      "phone-label": "Telefon:"
-    },
-    he: {
-      title: "לוי יצחק קפלביץ",
-      "about-title": "עליי",
-      "about-text": "אני לומד בבית הספר התיכון מספר 74 בסנקט פטרבורג, לומד גרמנית ברמה A1. תלמיד.",
-      "skills-title": "כישורים",
-      skills: [
-        "שפה גרמנית – רמה A1",
-        "מיומנויות מחשב",
-        "מיומנויות תכנות בסיסיות",
-        "תקשורת ועבודת צוות"
-      ],
-      "contacts-title": "פרטים ליצירת קשר",
-      "phone-label": "טלפון:"
-    }
-  };
+        <!-- Шапка -->
+        <div class="profile-header">
+            <h1 id="name">Лев Капелевич</h1>
+            <p class="subtitle" id="about">Ученик 74-й гимназии Санкт-Петербурга. IT-энтузиаст, администратор Linux и эксперт по Docker-инфраструктуре.</p>
+        </div>
 
-  function setLang(lang) {
-    if (!data[lang]) return;
-    document.getElementById('title').textContent = data[lang].title;
-    document.getElementById('about-title').textContent = data[lang]["about-title"];
-    document.getElementById('about-text').textContent = data[lang]["about-text"];
-    document.getElementById('skills-title').textContent = data[lang]["skills-title"];
-    document.getElementById('contacts-title').textContent = data[lang]["contacts-title"];
-    document.getElementById('phone-label').textContent = data[lang]["phone-label"];
+        <div class="content-grid">
+            <!-- Технологии -->
+            <div class="section-card">
+                <h2 id="skills-title">Технологии</h2>
+                <div class="tag-container" id="tag-container">
+                    <span class="tag">Docker Compose</span>
+                    <span class="tag">Linux / Bash</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Nginx Proxy Manager</span>
+                    <span class="tag">Cloudflare</span>
+                    <span class="tag">Git / GitHub</span>
+                    <span class="tag">Uptime Kuma</span>
+                    <span class="tag">Matrix Server</span>
+                    <span class="tag">System Admin</span>
+                </div>
+            </div>
 
-    const skillsList = document.getElementById('skills-list');
-    skillsList.innerHTML = '';
-    data[lang].skills.forEach(skill => {
-      const li = document.createElement('li');
-      li.textContent = skill;
-      skillsList.appendChild(li);
-    });
-  }
+            <!-- Связь -->
+            <div class="section-card">
+                <h2 id="contacts-title">Связь</h2>
+                <ul class="contacts-list">
+                    <li><a href="https://t.me/Kapelevik" target="_blank"><span>✈️</span> Telegram</a></li>
+                    <li><a href="https://youtube.com/@Kapelevik" target="_blank"><span>▶️</span> YouTube</a></li>
+                    <li><a href="https://vk.com/kapelevik" target="_blank"><span>📘</span> VKontakte</a></li>
+                </ul>
+            </div>
 
-  // Установить русский по умолчанию
-  setLang('ru');
-</script>
+            <!-- Проекты -->
+            <div class="section-card full-width">
+                <h2 id="projects-title">Проекты и разработки</h2>
+                <div class="projects-list" id="projects-list">
+                    <!-- Будет заполняться из JS -->
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        const translations = {
+            ru: {
+                name: "Лев Капелевич",
+                about: "Ученик 74-й гимназии Санкт-Петербурга. IT-энтузиаст, администратор Linux и эксперт по Docker-инфраструктуре.",
+                skillsTitle: "Технологии",
+                projectsTitle: "Проекты и разработки",
+                contactsTitle: "Связь",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "Системный администратор"],
+                projects: [
+                    { name: "KapelevichChat", desc: "Персональный сервер Matrix в контейнерах Docker для безопасного общения." },
+                    { name: "Secure Tunnel", desc: "Развертывание защищенных VPN-узлов и настройка маршрутизации трафика." },
+                    { name: "Школьный портал с ИИ", desc: "Веб-сайт для гимназии с интеграцией нейросетей для помощи ученикам." },
+                    { name: "Kapelevich.ru", desc: "Персональный лендинг-визитка с современным дизайном и поддержкой нескольких языков." }
+                ],
+                dir: "ltr"
+            },
+            en: {
+                name: "Leo Kapelevich",
+                about: "Student at Gymnasium 74 in St. Petersburg. IT enthusiast, Linux admin, and Docker infrastructure expert.",
+                skillsTitle: "Stack",
+                projectsTitle: "Projects & Development",
+                contactsTitle: "Connect",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "System Admin"],
+                projects: [
+                    { name: "KapelevichChat", desc: "Personal Matrix server in Docker containers for secure communication." },
+                    { name: "Secure Tunnel", desc: "Deployment of protected VPN nodes and traffic routing configuration." },
+                    { name: "School AI Portal", desc: "Gymnasium website with AI integrations to assist students." },
+                    { name: "Kapelevich.ru", desc: "Personal landing page with modern design and multi-language support." }
+                ],
+                dir: "ltr"
+            },
+            de: {
+                name: "Leo Kapelevich",
+                about: "Schüler am Gymnasium 74 in St. Petersburg. IT-Enthusiast, Linux-Admin und Experte für Docker-Infrastruktur.",
+                skillsTitle: "Stack",
+                projectsTitle: "Projekte & Entwicklung",
+                contactsTitle: "Kontakt",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "Systemadmin"],
+                projects: [
+                    { name: "KapelevichChat", desc: "Persönlicher Matrix-Server in Docker-Containern für sichere Kommunikation." },
+                    { name: "Secure Tunnel", desc: "Bereitstellung geschützter VPN-Knoten und Konfiguration des Traffic-Routings." },
+                    { name: "Schul-KI-Portal", desc: "Gymnasium-Website mit KI-Integrationen zur Unterstützung von Schülern." },
+                    { name: "Kapelevich.ru", desc: "Persönliche Landingpage mit modernem Design und Mehrsprachigkeit." }
+                ],
+                dir: "ltr"
+            },
+            he: {
+                name: "לב קפלביץ'",
+                about: "תלמיד בגימנסיה 74 בסנט פטרסבורג. חובב IT, מנהל לינוקס ומומחה לתשתית Docker.",
+                skillsTitle: "טכנולוגיות",
+                projectsTitle: "פרויקטים ופיתוח",
+                contactsTitle: "ליצירת קשר",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "שרת Matrix", "מנהל מערכות"],
+                projects: [
+                    { name: "KapelevichChat", desc: "שרת Matrix אישי במיכלי Docker לתקשורת מאובטחת." },
+                    { name: "Secure Tunnel", desc: "פריסת צמתי VPN מוגנים והגדרת ניתוב תעבורה." },
+                    { name: "פורטל AI לבית הספר", desc: "אתר לגימנסיה עם שילובי בינה מלאכותית לסיוע לתלמידים." },
+                    { name: "Kapelevich.ru", desc: "דף נחיתה אישי עם עיצוב מודרני ותמיכה במספר שפות." }
+                ],
+                dir: "rtl"
+            }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            
+            // Основные тексты
+            document.getElementById('name').textContent = t.name;
+            document.getElementById('about').textContent = t.about;
+            document.getElementById('skills-title').textContent = t.skillsTitle;
+            document.getElementById('projects-title').textContent = t.projectsTitle;
+            document.getElementById('contacts-title').textContent = t.contactsTitle;
+            
+            // Направление текста
+            document.documentElement.setAttribute('dir', t.dir);
+
+            // Перевод тегов
+            const tagContainer = document.getElementById('tag-container');
+            tagContainer.innerHTML = '';
+            t.tags.forEach(tagName => {
+                const span = document.createElement('span');
+                span.className = 'tag';
+                span.textContent = tagName;
+                tagContainer.appendChild(span);
+            });
+
+            // Перевод проектов
+            const projectsList = document.getElementById('projects-list');
+            projectsList.innerHTML = '';
+            t.projects.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'project-item';
+                div.innerHTML = `
+                    <div class="project-name">${p.name}</div>
+                    <div class="project-desc">${p.desc}</div>
+                `;
+                projectsList.appendChild(div);
+            });
+            
+            // Активная кнопка
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(lang));
+            if(activeBtn) activeBtn.classList.add('active');
+        }
+
+        // Инициализация при загрузке
+        window.onload = () => setLanguage('ru');
+    </script>
 </body>
 </html>
