@@ -402,115 +402,531 @@
                     "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", 
                     "YouTube Content", "Video Editing", "Grafana", "Proxmox", 
                     "UI Design", "Figma", "Web Development", "System Admin"
-                ],
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лев Капелевич | Личная страница</title>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            --text-color: #ffffff;
+            --accent: #3b82f6;
+            --secondary: #0ea5e9;
+            --cyan: #22d3ee;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #0f172a;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Анимированный жидкий фон */
+        .background-blobs {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; z-index: -1;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.5;
+            border-radius: 50%;
+            animation: float 25s infinite alternate ease-in-out;
+        }
+
+        .blob-1 { width: 450px; height: 450px; background: #2563eb; top: -10%; left: -5%; }
+        .blob-2 { width: 550px; height: 550px; background: #0ea5e9; bottom: -15%; right: -5%; animation-delay: -5s; }
+        .blob-3 { width: 350px; height: 350px; background: #06b6d4; top: 30%; right: 20%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, 80px) scale(1.1); }
+            100% { transform: translate(-40px, -40px) scale(0.9); }
+        }
+
+        /* Главная стеклянная карточка */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Выбор языка */
+        .lang-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255,255,255,0.7);
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        /* Навигация по вкладкам */
+        .tabs-nav {
+            display: flex;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 4px;
+            gap: 4px;
+            margin-bottom: 40px;
+            align-self: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab-btn.active {
+            background: rgba(59, 130, 246, 0.25);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Заголовок имени */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        /* Контент страниц */
+        .page-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        
+        #about-page {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-card {
+            background: rgba(15, 23, 42, 0.3);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+        
+        /* Класс для секций на главной, которые могут сворачиваться */
+        .collapsible-card {
+             transition: all 0.3s ease;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #f1f5f9;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--secondary);
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--secondary);
+        }
+
+        .chevron {
+            display: none;
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Стилизация контента */
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag { background: rgba(14, 165, 233, 0.1); color: #7dd3fc; padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; border: 1px solid rgba(14, 165, 233, 0.2); }
+        .contacts-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .contacts-list a { color: #e2e8f0; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: rgba(255,255,255,0.03); border-radius: 12px; transition: 0.3s; }
+        .contacts-list a:hover { background: rgba(59, 130, 246, 0.1); }
+        
+        .full-width { grid-column: 1 / -1; }
+        .projects-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .project-item { padding: 18px; background: rgba(255, 255, 255, 0.02); border-radius: 14px; border: 1px solid rgba(255,255,255,0.03); }
+        .project-name { font-weight: 700; color: #fff; }
+        .project-desc { font-size: 0.9rem; color: #94a3b8; margin-top: 5px; }
+
+        /* Текст в разделах "Обо мне" */
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            margin-top: 15px;
+        }
+
+        /* Футер */
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            color: rgba(148, 163, 184, 0.6);
+            font-size: 0.85rem;
+        }
+        .footer-email {
+            display: block;
+            margin-top: 6px;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Умное поведение для мобилок и ПК */
+        @media (min-width: 801px) {
+            .section-content { max-height: none !important; opacity: 1 !important; margin-top: 18px; }
+        }
+
+        @media (max-width: 800px) {
+            .page-content { grid-template-columns: 1fr; gap: 12px; }
+            .full-width { grid-column: auto; }
+            .glass-card { padding: 30px 20px; }
+            h1 { font-size: 2.4rem; }
+            
+            /* Показываем шеврон только для сворачиваемых секций на главной */
+            .collapsible-card .chevron { display: block; }
+            .collapsible-card { cursor: pointer; }
+            .projects-list { grid-template-columns: 1fr; }
+
+            /* Логика сворачивания только для Главной */
+            .collapsible-card .section-content {
+                max-height: 0;
+                opacity: 0;
+                transition: max-height 0.4s ease, opacity 0.3s ease;
+            }
+            .collapsible-card.expanded .section-content {
+                max-height: 1000px;
+                opacity: 1;
+                margin-top: 18px;
+            }
+            .collapsible-card.expanded .chevron { transform: rotate(180deg); }
+        }
+
+        /* Поддержка RTL (Иврит) */
+        [dir="rtl"] .subtitle, [dir="rtl"] h1, [dir="rtl"] .project-item, [dir="rtl"] .about-text { text-align: right; }
+        [dir="rtl"] h2::before { margin-left: 10px; margin-right: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="glass-card">
+        <!-- Языки -->
+        <div class="lang-nav">
+            <button class="lang-btn active" onclick="setLanguage('ru')">🇷🇺 RU</button>
+            <button class="lang-btn" onclick="setLanguage('en')">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLanguage('de')">🇩🇪 DE</button>
+            <button class="lang-btn" onclick="setLanguage('he')">🇮🇱 HE</button>
+        </div>
+
+        <!-- Переключатель вкладок -->
+        <div class="tabs-nav">
+            <button id="home-tab-btn" class="tab-btn active" onclick="switchPage('home')">Главное</button>
+            <button id="about-tab-btn" class="tab-btn" onclick="switchPage('about')">Обо мне</button>
+        </div>
+
+        <!-- Имя -->
+        <div class="profile-header">
+            <h1 id="name">Лев Капелевич</h1>
+        </div>
+
+        <!-- СТРАНИЦА: ГЛАВНОЕ -->
+        <div id="home-page" class="page-content">
+            <div class="section-card collapsible-card" onclick="toggleSection(this)">
+                <div class="section-header">
+                    <h2 id="skills-title">Технологии</h2>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="section-content">
+                    <div class="tag-container" id="tag-container"></div>
+                </div>
+            </div>
+
+            <div class="section-card collapsible-card" onclick="toggleSection(this)">
+                <div class="section-header">
+                    <h2 id="contacts-title">Связь</h2>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="section-content">
+                    <ul class="contacts-list">
+                        <li><a href="https://t.me/Kapelevik" target="_blank"><span>✈️</span> Telegram</a></li>
+                        <li><a href="https://youtube.com/@Kapelevik" target="_blank"><span>▶️</span> YouTube</a></li>
+                        <li><a href="https://vk.com/kapelevik" target="_blank"><span>📘</span> VKontakte</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-card full-width collapsible-card" onclick="toggleSection(this)">
+                <div class="section-header">
+                    <h2 id="projects-title">Проекты и разработки</h2>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="section-content">
+                    <div class="projects-list" id="projects-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА: ОБО МНЕ (Не сворачиваемые карточки) -->
+        <div id="about-page" style="display: none;">
+            <div class="section-card">
+                <div class="section-header">
+                    <h2 id="about-title-1">Кто я</h2>
+                </div>
+                <div class="about-text" id="about-text-1">
+                    Привет! Меня зовут Лев Капелевич. Я ученик 5 класса 74-й гимназии Санкт-Петербурга (родился в 2014 году). Моё главное увлечение — это сфера IT, системное администрирование серверов и программирование.
+                </div>
+            </div>
+            
+            <div class="section-card">
+                <div class="section-header">
+                    <h2 id="about-title-2">Инфраструктура и разработка</h2>
+                </div>
+                <div class="about-text" id="about-text-2">
+                    В работе с инфраструктурой я активно использую Linux, Docker Compose и автоматизацию задач на Bash. Я занимаюсь не просто изучением теории, а реальной практикой: разворачиваю защищенные VPN-туннели (WireGuard), управляю собственным сервером Matrix для безопасного общения и внедряю интеллектуальные ИИ-решения в веб-ресурсы.
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h2 id="about-title-3">Хобби и увлечения</h2>
+                </div>
+                <div class="about-text" id="about-text-3">
+                    Помимо серверных технологий, я развиваю свой YouTube-канал, самостоятельно занимаюсь видеомонтажом и обработкой звука. Также я интересуюсь современным компьютерным железом, гаджетами и играми на платформе Steam (например, Hello Neighbor). Мой приоритет — постоянное изучение нового и создание полезных технологических проектов.
+                </div>
+            </div>
+        </div>
+
+        <!-- Подвал -->
+        <footer>
+            <span id="footer-text">© 2014-2026 Kapelevich Company</span>
+            <a href="mailto:lev@kapelevich.ru" class="footer-email">lev@kapelevich.ru</a>
+        </footer>
+    </div>
+
+    <script>
+        const translations = {
+            ru: {
+                tabHome: "Главное", tabAbout: "Обо мне", name: "Лев Капелевич",
+                skillsTitle: "Технологии", projectsTitle: "Проекты и разработки", contactsTitle: "Связь",
+                footer: "© 2014-2026 Kapelevich Company",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "YouTube Content", "Video Editing", "Figma", "Web Development", "System Admin"],
                 projects: [
                     { name: "KapelevichChat", desc: "Персональный сервер Matrix в контейнерах Docker для безопасного общения." },
                     { name: "Secure Tunnel", desc: "Развертывание защищенных VPN-узлов и настройка маршрутизации трафика." },
                     { name: "Школьный портал с ИИ", desc: "Веб-сайт для гимназии с интеграцией нейросетей для помощи ученикам." },
                     { name: "Kapelevich.ru", desc: "Персональный лендинг-визитка с современным дизайном и поддержкой нескольких языков." }
                 ],
+                aboutTitle1: "Кто я",
+                aboutText1: "Привет! Меня зовут Лев Капелевич. Я ученик 5 класса 74-й гимназии Санкт-Петербурга (родился в 2014 году). Моё главное увлечение — это сфера IT, системное администрирование серверов и программирование.",
+                aboutTitle2: "Инфраструктура и разработка",
+                aboutText2: "В работе с инфраструктурой я активно использую Linux, Docker Compose и автоматизацию задач на Bash. Я занимаюсь не просто изучением теории, а реальной практикой: разворачиваю защищенные VPN-туннели (WireGuard), управляю собственным сервером Matrix для безопасного общения и внедряю интеллектуальные ИИ-решения в веб-ресурсы.",
+                aboutTitle3: "Хобби и увлечения",
+                aboutText3: "Помимо серверных технологий, я развиваю свой YouTube-канал, самостоятельно занимаюсь видеомонтажом и обработкой звука. Также я интересуюсь современным компьютерным железом, гаджетами и играми на платформе Steam (например, Hello Neighbor). Мой приоритет — постоянное изучение нового и создание полезных технологических проектов.",
                 dir: "ltr"
             },
             en: {
-                name: "Leo Kapelevich",
-                about: "Student at Gymnasium 74 in St. Petersburg. IT enthusiast, Linux admin, and Docker infrastructure expert.",
-                skillsTitle: "Stack",
-                projectsTitle: "Projects & Development",
-                contactsTitle: "Connect",
-                footer: "&copy; 2014-2026 Kapelevich Company",
-                tags: [
-                    "Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", 
-                    "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", 
-                    "YouTube Content", "Video Editing", "Grafana", "Proxmox", 
-                    "UI Design", "Figma", "Web Development", "System Admin"
-                ],
+                tabHome: "Home", tabAbout: "About Me", name: "Leo Kapelevich",
+                skillsTitle: "Stack", projectsTitle: "Projects & Development", contactsTitle: "Connect",
+                footer: "© 2014-2026 Kapelevich Company",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "YouTube Content", "Video Editing", "Figma", "Web Development", "System Admin"],
                 projects: [
                     { name: "KapelevichChat", desc: "Personal Matrix server in Docker containers for secure communication." },
                     { name: "Secure Tunnel", desc: "Deployment of protected VPN nodes and traffic routing configuration." },
                     { name: "School AI Portal", desc: "Gymnasium website with AI integrations to assist students." },
                     { name: "Kapelevich.ru", desc: "Personal landing page with modern design and multi-language support." }
                 ],
+                aboutTitle1: "Who I Am",
+                aboutText1: "Hi! My name is Leo Kapelevich. I am a 5th-grade student at Gymnasium 74 in St. Petersburg (born in 2014). My main passion is IT, system administration, and programming.",
+                aboutTitle2: "Infrastructure & Development",
+                aboutText2: "In my workflow, I actively use Linux, Docker Compose, and Bash automation. I focus on real-world practice: deploying secure VPN tunnels (WireGuard), hosting my own Matrix server for private communication, and integrating advanced AI solutions into web projects.",
+                aboutTitle3: "Hobbies & Interests",
+                aboutText3: "Beyond backend technologies, I run my own YouTube channel, handling full-cycle video editing and audio production myself. I'm also deeply interested in modern computer hardware, gadgets, and gaming via Steam (like Hello Neighbor). My priority is constant learning and creating useful tech solutions.",
                 dir: "ltr"
             },
             de: {
-                name: "Leo Kapelevich",
-                about: "Schüler am Gymnasium 74 in St. Petersburg. IT-Enthusiast, Linux-Admin und Experte für Docker-Infrastruktur.",
-                skillsTitle: "Stack",
-                projectsTitle: "Projekte & Entwicklung",
-                contactsTitle: "Kontakt",
-                footer: "&copy; 2014-2026 Kapelevich Company",
-                tags: [
-                    "Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", 
-                    "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", 
-                    "YouTube Content", "Video Editing", "Grafana", "Proxmox", 
-                    "UI Design", "Figma", "Web Development", "System Admin"
-                ],
+                tabHome: "Startseite", tabAbout: "Über mich", name: "Leo Kapelevich",
+                skillsTitle: "Stack", projectsTitle: "Projekte & Entwicklung", contactsTitle: "Kontakt",
+                footer: "© 2014-2026 Kapelevich Company",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "Matrix Server", "YouTube Content", "Video Editing", "Figma", "Web Development", "System Admin"],
                 projects: [
                     { name: "KapelevichChat", desc: "Persönlicher Matrix-Server in Docker-Containern für sichere Kommunikation." },
                     { name: "Secure Tunnel", desc: "Bereitstellung geschützter VPN-Knoten und Konfiguration des Traffic-Routings." },
                     { name: "Schul-KI-Portal", desc: "Gymnasium-Website mit KI-Integrationen zur Unterstützung von Schülern." },
                     { name: "Kapelevich.ru", desc: "Persönliche Landingpage mit modernem Design und Mehrsprachigkeit." }
                 ],
+                aboutTitle1: "Wer ich bin",
+                aboutText1: "Hallo! Mein Name ist Leo Kapelevich. Ich bin ein Schüler der 5. Klasse am Gymnasium 74 in St. Petersburg (geboren im Jahr 2014). Meine große Leidenschaft sind IT, Systemadministration und Programmierung.",
+                aboutTitle2: "Infrastruktur & Entwicklung",
+                aboutText2: "Ich verwende aktiv Linux, Docker Compose und Bash-Automatisierung. Ich konzentriere mich auf die Praxis: Bereitstellung sicherer VPN-Tunnel (WireGuard), Hosting meines eigenen Matrix-Servers und Integration von KI-Lösungen in Webprojekte.",
+                aboutTitle3: "Hobbys & Interessen",
+                aboutText3: "Neben Servertechnologien erstelle ich Inhalte für meinen YouTube-Kanal und übernehme den Videoschnitt selbst. Ich interessiere mich auch für Computerhardware, Gadgets und Gaming auf Steam (wie Hello Neighbor). Mein Ziel ist ständiges Lernen.",
                 dir: "ltr"
             },
             he: {
-                name: "לב קפלביץ'",
-                about: "תלמיד בגימנסיה 74 בסנט פטרסבורג. חובב IT, מנהל לינוקס ומומחה לתשתית Docker.",
-                skillsTitle: "טכנולוגיות",
-                projectsTitle: "פרויקטים ופיתוח",
-                contactsTitle: "ליצירת קשר",
-                footer: "&copy; 2014-2026 Kapelevich Company",
-                tags: [
-                    "Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", 
-                    "Cloudflare", "Git / GitHub", "Uptime Kuma", "שרת Matrix", 
-                    "תוכן יוטיוב", "עריכת וידאו", "Grafana", "Proxmox", 
-                    "עיצוב UI", "Figma", "פיתוח אתרים", "מנהל מערכות"
-                ],
+                tabHome: "ראשי", tabAbout: "עלי", name: "לב קפלביץ'",
+                skillsTitle: "טכנולוגיות", projectsTitle: "פרויקטים ופיתוח", contactsTitle: "ליצירת קשר",
+                footer: "© 2014-2026 Kapelevich Company",
+                tags: ["Docker Compose", "Linux / Bash", "Python", "Nginx Proxy Manager", "Cloudflare", "Git / GitHub", "Uptime Kuma", "שרת Matrix", "תוכן יוטיוב", "עריכת וידאו", "Figma", "פיתוח אתרים", "מנהל מערכות"],
                 projects: [
                     { name: "KapelevichChat", desc: "שרת Matrix אישי במיכלי Docker לתקשורת מאובטחת." },
                     { name: "Secure Tunnel", desc: "פריסת צמתי VPN מוגנים והגדרת ניתוב תעבורה." },
                     { name: "פורטל AI לבית הספר", desc: "אתר לגימנסיה עם שילובי בינה מלאכותית לסיוע לתלמידים." },
                     { name: "Kapelevich.ru", desc: "דף נחיתה אישי עם עיצוב מודרני ותמיכה במספר שפות." }
                 ],
+                aboutTitle1: "מי אני",
+                aboutText1: "שלום! שמי לב קפלביץ'. אני תלמיד כיתה ה' בגימנסיה 74 בסנט פטרסבורג (נולדתי בשנת 2014). התשוקה העיקרית שלי היא IT, ניהול מערכות ותכנות.",
+                aboutTitle2: "תשתית ופיתוח",
+                aboutText2: "אני משתמש באופן פעיל בלינוקס, Docker Compose ואוטומציה של Bash. אני מתמקד בפרקטיקה בעולם האמיתי: פריסת מנהרות VPN מאובטחות (WireGuard), ניהול שרת Matrix משלי לתקשורת מאובטחת ושילוב פתרונות בינה מלאכותית חכמים בפרויקטים של אתרי אינטרנט.",
+                aboutTitle3: "תחביבים ותחומי עניין",
+                aboutText3: "מעבר לטכנולוגיות שרתים, אני מפתח ערוץ יוטיוב משלי, ומנהל בעצמי את כל תהליך עריכת הוידאו והפקת הסאונד. אני מתעניין גם בחומרת מחשבים מודרנית, גאדג'טים ומשחקים ב-Steam (כמו Hello Neighbor). העדפה שלי היא למידה מתמדת.",
                 dir: "rtl"
             }
         };
 
         function setLanguage(lang) {
             const t = translations[lang];
+            
+            document.getElementById('home-tab-btn').textContent = t.tabHome;
+            document.getElementById('about-tab-btn').textContent = t.tabAbout;
             document.getElementById('name').textContent = t.name;
-            document.getElementById('about').textContent = t.about;
             document.getElementById('skills-title').textContent = t.skillsTitle;
             document.getElementById('projects-title').textContent = t.projectsTitle;
             document.getElementById('contacts-title').textContent = t.contactsTitle;
             document.getElementById('footer-text').innerHTML = t.footer;
+            
+            document.getElementById('about-title-1').textContent = t.aboutTitle1;
+            document.getElementById('about-text-1').textContent = t.aboutText1;
+            document.getElementById('about-title-2').textContent = t.aboutTitle2;
+            document.getElementById('about-text-2').textContent = t.aboutText2;
+            document.getElementById('about-title-3').textContent = t.aboutTitle3;
+            document.getElementById('about-text-3').textContent = t.aboutText3;
+            
             document.documentElement.setAttribute('dir', t.dir);
 
+            // Рендер тегов
             const tagContainer = document.getElementById('tag-container');
-            tagContainer.innerHTML = '';
-            t.tags.forEach(tagName => {
-                const span = document.createElement('span');
-                span.className = 'tag';
-                span.textContent = tagName;
-                tagContainer.appendChild(span);
-            });
+            tagContainer.innerHTML = t.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
+            // Рендер проектов
             const projectsList = document.getElementById('projects-list');
-            projectsList.innerHTML = '';
-            t.projects.forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'project-item';
-                div.innerHTML = `<div class="project-name">${p.name}</div><div class="project-desc">${p.desc}</div>`;
-                projectsList.appendChild(div);
-            });
-            
+            projectsList.innerHTML = t.projects.map(p => `
+                <div class="project-item">
+                    <div class="project-name">${p.name}</div>
+                    <div class="project-desc">${p.desc}</div>
+                </div>
+            `).join('');
+
+            // Подсветка кнопок
             const buttons = document.querySelectorAll('.lang-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().includes(lang));
             if(activeBtn) activeBtn.classList.add('active');
         }
 
+        function switchPage(page) {
+            // Закрываем открытые аккордеоны перед сменой страницы
+            document.querySelectorAll('.collapsible-card').forEach(card => card.classList.remove('expanded'));
+
+            if (page === 'home') {
+                document.getElementById('home-page').style.display = 'grid';
+                document.getElementById('about-page').style.display = 'none';
+                document.getElementById('home-tab-btn').classList.add('active');
+                document.getElementById('about-tab-btn').classList.remove('active');
+            } else {
+                document.getElementById('home-page').style.display = 'none';
+                document.getElementById('about-page').style.display = 'flex';
+                document.getElementById('home-tab-btn').classList.remove('active');
+                document.getElementById('about-tab-btn').classList.add('active');
+            }
+        }
+
         function toggleSection(element) {
+            // Срабатывает как аккордеон только на экранах смартфонов
             if (window.innerWidth <= 800) {
                 element.classList.toggle('expanded');
             }
@@ -518,16 +934,11 @@
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 800) {
-                document.querySelectorAll('.section-card').forEach(card => card.classList.remove('expanded'));
+                document.querySelectorAll('.collapsible-card').forEach(card => card.classList.remove('expanded'));
             }
         });
 
-        window.onload = () => {
-            setLanguage('ru');
-            if (window.innerWidth <= 800) {
-                document.querySelector('.section-card').classList.add('expanded');
-            }
-        };
+        window.onload = () => setLanguage('ru');
     </script>
 </body>
 </html>
